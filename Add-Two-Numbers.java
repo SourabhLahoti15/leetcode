@@ -9,56 +9,37 @@
 9 * }
 10 */
 11class Solution {
-12    public ListNode solve(ListNode l1, ListNode l2, int carry) {
-13        if (l1 == null && l2 == null && carry == 0) {
-14            return null;
-15        }
-16        int v1 = (l1 != null) ? l1.val : 0;
-17        int v2 = (l2 != null) ? l2.val : 0;
-18        int add = v1 + v2 + carry;
-19        int ld = add % 10;
-20        carry = add / 10;
-21        ListNode head = new ListNode(ld);
-22        head.next = solve(
-23            (l1 != null) ? l1.next : null,
-24            (l2 != null) ? l2.next : null,
-25            carry);
-26        return head;
-27    }
-28    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-29        // ListNode head = new ListNode(0);
-30        // ListNode ln = head;
-31        // int carry = 0;
-32        // while (l1 != null && l2 != null) {
-33        //     int add = l1.val + l2.val + carry;
-34        //     carry = add / 10;
-35        //     int ld = add % 10;
-36        //     ln.next = new ListNode(ld);
-37        //     ln = ln.next;
-38        //     l1 = l1.next;
-39        //     l2 = l2.next;
-40        // }
-41        // while (l1 != null) {
-42        //     int add = l1.val + carry;
-43        //     carry = add / 10;
-44        //     int ld = add % 10;
-45        //     ln.next = new ListNode(ld);
-46        //     ln = ln.next;
-47        //     l1 = l1.next;
-48        // }
-49        // while (l2 != null) {
-50        //     int add = l2.val + carry;
-51        //     carry = add / 10;
-52        //     int ld = add % 10;
-53        //     ln.next = new ListNode(ld);
-54        //     ln = ln.next;
-55        //     l2 = l2.next;
-56        // }
-57        // if (carry != 0)
-58        //     ln.next = new ListNode(carry);
-59        // return head.next;
-60
-61        // recursion
-62        return solve(l1, l2, 0);
-63    }
-64}
+12    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+13        ListNode head = new ListNode(0);
+14        ListNode ln = head;
+15        int carry = 0;
+16        while (l1 != null && l2 != null) {
+17            int add = l1.val + l2.val + carry;
+18            carry = add / 10;
+19            int ld = add % 10;
+20            ln.next = new ListNode(ld);
+21            ln = ln.next;
+22            l1 = l1.next;
+23            l2 = l2.next;
+24        }
+25        while (l1 != null) {
+26            int add = l1.val + carry;
+27            carry = add / 10;
+28            int ld = add % 10;
+29            ln.next = new ListNode(ld);
+30            ln = ln.next;
+31            l1 = l1.next;
+32        }
+33        while (l2 != null) {
+34            int add = l2.val + carry;
+35            carry = add / 10;
+36            int ld = add % 10;
+37            ln.next = new ListNode(ld);
+38            ln = ln.next;
+39            l2 = l2.next;
+40        }
+41        if (carry != 0)
+42            ln.next = new ListNode(carry);
+43        return head.next;
+44    }
+45}
