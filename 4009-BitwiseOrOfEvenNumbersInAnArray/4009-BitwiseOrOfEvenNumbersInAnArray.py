@@ -1,0 +1,12 @@
+# Last updated: 12/17/2025, 10:50:55 AM
+class Solution(object):
+    def evenNumberBitwiseORs(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        ans = 0
+        for num in nums:
+            if num%2==0:
+                ans |= num
+        return ans
