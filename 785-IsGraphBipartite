@@ -1,0 +1,25 @@
+// Last updated: 2/16/2026, 3:23:18 PM
+1class Solution {
+2    public boolean isBipartite(int[][] graph) {
+3        int n = graph.length;
+4        int[] teams = new int[n];
+5        Queue<Integer> q = new LinkedList<>();
+6        for (int i=0; i<n; i++) {
+7            if (teams[i] == 0) {
+8                q.offer(i);
+9                while (!q.isEmpty()) {
+10                    int cur = q.poll();
+11                    for (int neighbor : graph[cur]) {
+12                        if (teams[neighbor] == 0) {
+13                            teams[neighbor] = 3 - teams[cur];
+14                            q.offer(neighbor);
+15                        } else if (teams[neighbor] == teams[cur]) {
+16                            return false;
+17                        }
+18                    }
+19                }
+20            }
+21        }
+22        return true;
+23    }
+24}
